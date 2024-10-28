@@ -1,0 +1,25 @@
+/* App.css */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-card {
+    width: 25rem;
+}
+
+.p-field {
+    margin-bottom: 1rem;
+}
+.login-container {
+    text-align: center; /* Para centrar la imagen y el formulario */
+}
+
+.login-logo {
+    width: 150px; /* Ajusta este valor según el tamaño que desees */
+    height: auto; /* Mantiene la proporción de la imagen */
+    display: block; /* Opcional: para centrar la imagen */
+    margin: 0 auto 20px; /* Opcional: para centrar la imagen y añadir espacio inferior */
+}
