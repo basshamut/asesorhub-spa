@@ -1,14 +1,26 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Navbar from "../../components/navbar/NavBar.jsx";
 import {InputText} from "primereact/inputtext";
 import {Button} from "primereact/button";
 import {InputTextarea} from "primereact/inputtextarea";
 import {TabPanel, TabView} from "primereact/tabview";
+import {useAuth0} from "@auth0/auth0-react";
+import {useNavigate} from "react-router-dom";
 
 export default function DeletePatientPage() {
     const [patient, setPatient] = useState(null);
     const [searchCriteria, setSearchCriteria] = useState('');
     const [searchResult, setSearchResult] = useState(null);
+
+    const { isAuthenticated } = useAuth0();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!isAuthenticated) {
+            navigate("/asesorhub/login");
+        }
+    }, [isAuthenticated, navigate]);
+
     const handlePatientChange = (e) => {
         const {name, value} = e.target;
         setPatient({...patient, [name]: value});

@@ -7,6 +7,7 @@ import {Dialog} from 'primereact/dialog'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faClock, faEnvelope, faFile, faStar, faUsers} from '@fortawesome/free-solid-svg-icons'
 import {useNavigate} from "react-router-dom"
+import {useAuth0} from "@auth0/auth0-react";
 import {clearSession} from "../../utils/session.jsx";
 
 const Navbar = () => {
@@ -14,7 +15,7 @@ const Navbar = () => {
     const [searchVisible, setSearchVisible] = useState(false)
     const [messagesVisible, setMessagesVisible] = useState(false)
     const [notificationsVisible, setNotificationsVisible] = useState(false)
-
+    const {logout, isAuthenticated} = useAuth0()
     const items = [
         {
             label: 'Home',
@@ -36,7 +37,7 @@ const Navbar = () => {
                     }
                 }
             ]
-       },
+        },
         {
             label: 'Gestión de Citas',
             icon: 'pi pi-envelope',
@@ -55,8 +56,11 @@ const Navbar = () => {
 
     const handleLogout = () => {
         clearSession()
-        navigate('/asesorhub/login')
+        logout({ localOnly: true }) // Cierra sesión localmente sin redirigir
+        console.log(isAuthenticated + "(Logout)")
+        navigate('/asesorhub/login') // Redirige manualmente después de cerrar sesión
     }
+
 
     const handleSeaerch = () => {
         navigate('/asesorhub/search-result')
